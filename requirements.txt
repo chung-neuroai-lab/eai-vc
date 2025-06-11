@@ -1,0 +1,60 @@
+eigenpy==2.9.2
+# libglib=2.76.1 -> not compatible
+# glib=2.76.1 -> not compatible
+# glib-tools=2.76.1 -> not compatible
+black
+click
+cloudpickle
+cffi
+cmake==3.22.1
+# cudatoolkit=11.6 -> use pipwheel from pytorch
+cython<3
+flake8
+glfw
+# habitat-sim=0.2.1 -> not needed
+# opencv-python-headless -> not needed
+hydra-core
+ifcfg
+isort
+imageio
+ipdb
+ipython
+jupyter
+# mamba -> not needed for pip
+mkl-service
+moviepy
+numpy
+opencv-python
+pandas
+patchelf
+# pinocchio -> not compatible
+pillow
+protobuf==3.20.1
+pybullet
+pytest
+pytest-xdist
+# torch -> already installed
+pyyaml
+scipy
+seaborn
+six
+submitit
+tabulate
+tensorboard
+termcolor
+transforms3d
+# torchvision=0.14.0 -> already installed
+tqdm
+wandb>=0.13
+wheel
+yacs
+hydra-submitit-launcher
+dm-control==1.0.5
+gym==0.26.2
+setuptools==59.5.0
+timm==0.6.11
+git+https://github.com/openai/CLIP.git
+functorch
+torchrl
+classy_vision==0.6.0
+yt_dlp==2023.2.17
