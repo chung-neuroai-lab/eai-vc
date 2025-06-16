@@ -12,6 +12,7 @@ from gym.spaces.box import Box
 from mujoco_vc.model_loading import load_pretrained_model
 from mujoco_vc.supported_envs import ENV_TO_SUITE
 from typing import Union, Tuple
+import mujoco # mujoco-py is deprecated. See https://docs.pytorch.org/rl/0.7/reference/generated/knowledge_base/MUJOCO_INSTALLATION.html
 
 
 class MuJoCoPixelObsWrapper(gym.ObservationWrapper):
@@ -33,6 +34,10 @@ class MuJoCoPixelObsWrapper(gym.ObservationWrapper):
         self.camera_name = camera_name
         self.depth = depth
         self.device_id = device_id
+        self.model = env.unwrapped.model
+        self.data = env.unwrapped.data
+        # Create a MuJoCo Renderer
+        self.renderer = mujoco.Renderer(self.model, self.width, self.height)
 
     def get_image(self):
         if self.spec.id.startswith("dmc"):
@@ -47,15 +52,18 @@ class MuJoCoPixelObsWrapper(gym.ObservationWrapper):
                 camera_id=int(self.camera_name),
             )
         else:
-            # mujoco-py backend
-            img = self.sim.render(
-                width=self.width,
-                height=self.height,
-                depth=self.depth,
-                camera_name=self.camera_name,
-                device_id=self.device_id,
-            )
-            img = img[::-1, :, :]
+            # mujoco-py backend -> mujoco-py is deprecated, need to use `mujoco` instead
+            # img = self.sim.render(
+            #     width=self.width,
+            #     height=self.height,
+            #     depth=self.depth,
+            #     camera_name=self.camera_name,
+            #     device_id=self.device_id,
+            # )
+            # img = img[::-1, :, :]
+            # Render the image using the specified camera
+            self.renderer.update_scene(self.data, camera=self.camera_name)
+            img = self.renderer.render()
         return img
 
     def observation(self, observation):
@@ -258,7 +266,7 @@ def env_constructor(
 
 
 def get_proprioception(env: gym.Env, suite: str) -> Union[np.ndarray, None]:
-    assert isinstance(env, gym.Env)
+    #assert isinstance(env, gym.Env)
     if suite == "metaworld":
         return env.unwrapped._get_obs()[:4]
     elif suite == "adroit":
