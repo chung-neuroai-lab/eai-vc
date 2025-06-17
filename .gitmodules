@@ -1,6 +1,6 @@
 [submodule "third_party/mjrl"]
 	path = third_party/mjrl
-	url = https://github.com/chung-neuroai-lab/mjrl.git
+	url = https://github.com/hangletn/mjrl.git
 [submodule "third_party/mj_envs"]
 	path = third_party/mj_envs
 	url = https://github.com/vikashplus/mj_envs.git
