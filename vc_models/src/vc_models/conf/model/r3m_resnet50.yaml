@@ -1,0 +1,12 @@
+_target_: vc_models.models.load_model
+model:
+  _target_: r3m.load_r3m
+  modelid: resnet50
+transform:
+  _target_: vc_models.transforms.r3m_transforms
+metadata:
+  algo: r3m
+  model: r3m_resnet50
+  data:
+    - ego
+  comment: see paper at "R3M A Universal Visual Representation for Robot Manipulation"

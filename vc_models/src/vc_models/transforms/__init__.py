@@ -39,7 +39,18 @@ def r3m_transforms(resize_size=256, output_size=224):
             ToTensorIfNot(),  # this divides by 255
             T.Resize(resize_size),
             T.CenterCrop(output_size),
-            T.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
+            T.Lambda(lambda x: x * 255.0), # R3M expects image input to be [0-255]
+            # T.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
+        ]
+    )
+
+
+def vip_transforms(resize_size=256, output_size=224):
+    return T.Compose(
+        [   
+            ToTensorIfNot(),
+            T.Resize(resize_size),
+            T.CenterCrop(output_size),
         ]
     )
 

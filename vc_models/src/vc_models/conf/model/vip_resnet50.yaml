@@ -1,0 +1,11 @@
+_target_: vc_models.models.load_model
+model:
+  _target_: vip.load_vip # DONE
+transform:
+  _target_: vc_models.transforms.vip_transforms # DONE
+metadata: # DONE
+  algo: vip
+  model: vip_resnet50
+  data:
+    - ego
+  comment: For more info, see the paper "VIP Towards Universal Visual Reward and Representation via Value-Implicit Pre-Training"
