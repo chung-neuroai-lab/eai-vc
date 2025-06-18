@@ -18,7 +18,7 @@
 	url = https://github.com/chung-neuroai-lab/dmc2gym.git
 [submodule "third_party/metaworld"]
 	path = third_party/metaworld
-	url = https://github.com/suraj-nair-1/metaworld.git
+	url = https://github.com/chung-neuroai-lab/Metaworld.git
 [submodule "third_party/habitat2"]
 	path = third_party/habitat2
 	url = https://github.com/mathfac/habitat-lab
